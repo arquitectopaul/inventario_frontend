@@ -1,0 +1,32 @@
+<div>
+    <h2 mat-dialog-title>{{ estadoFormulario }} Artículo</h2>
+</div>
+<mat-dialog-content>
+    <!-- Mostrar loader mientras isLoading es true -->
+    <div *ngIf="isLoading" class="loader-container">
+        <mat-spinner diameter="30"></mat-spinner>
+    </div>    
+    <form [formGroup]="articuloForm" *ngIf="!isLoading">
+        <div class="articulo-container">           
+            <mat-form-field>
+                <input matInput placeholder="Nombre" formControlName="nombrearticulo" required (input)="convertirAMayusculas($event)"/>
+            </mat-form-field>
+
+            <mat-form-field>
+                <textarea matInput placeholder="Descripción" formControlName="descriparticulo" required (input)="convertirAMayusculas($event)"></textarea>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+    <button mat-button color="primary" (click)="onSave()" [disabled]="articuloForm.invalid">
+        <mat-icon>save</mat-icon> Guardar
+    </button>
+
+    <button mat-button color="primary" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon> Cancelar
+    </button>
+
+</mat-dialog-actions>

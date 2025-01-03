@@ -1,0 +1,159 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.is-mobile .dashboard-toolbar {
+    position: fixed;
+    z-index: 2;
+}
+
+h1.app-name {
+    margin-left: 8px;
+    margin-top: 15px;
+}
+
+.sidenav-container {
+    flex: 1;
+}
+
+.is-mobile .sidenav-container {
+    flex: 1 0 auto;
+}
+
+ul li {
+    list-style: none;
+}
+
+.profile-card {
+    text-align: center;
+    padding: 0 20px 20px 20px;
+    background-color: #071437; /* Fondo oscuro */
+    color: #9A9CAE; /* Color de texto gris */
+    padding: 20px; /* Ajuste de padding para separación */
+    text-align: center; /* Centrar el contenido */
+    border-radius: 10px 0 10px 0; /* Bordes redondeados excepto el superior derecho y el inferior izquierdo */
+    margin: 10px; /* Espacio alrededor del perfil */
+}
+
+.header {
+    margin-top: 20px;
+}
+
+.icono {
+    margin-right: 10px;
+}
+
+div ul {
+    display: flex;
+    align-items: center;
+}
+
+.right {
+    margin-left: auto;
+}
+
+.name {
+    margin-bottom: 1px;
+}
+
+/* Estilos específicos para el mat-sidenav dentro de SidenavComponent */
+.mat-drawer-container.sidenav-container {
+    background-color: #464852; /* Fondo negro */
+    color: #9A9CAE; /* Color de texto gris */
+    border-radius: 15px; /* Bordes redondeados */
+    overflow: hidden; /* Asegura que el contenido no se desborde fuera de los bordes redondeados */
+}
+
+.mat-drawer-content {
+    color: #9A9CAE; /* Color de texto gris para el contenido del sidenav */
+}
+
+.mat-drawer-container.sidenav-container .mat-list-item {
+    background-color: #464852; /* Fondo negro */
+    color: #9A9CAE; /* Color de texto gris */
+    padding: 10px 20px; /* Ajuste de padding para separación */
+    border-radius: 10px; /* Bordes redondeados para los elementos de la lista */
+    margin: 5px 10px; /* Espacio entre elementos para ver el efecto de borde redondeado */
+}
+
+.mat-drawer-container.sidenav-container .mat-list-item:hover {
+    background-color: #071437; /* Fondo oscuro al pasar el mouse */
+    color: #FFFFFF; /* Texto blanco al pasar el mouse */
+}
+
+/* Estilo específico para el perfil (profile-card) dentro del mat-sidenav */
+.mat-drawer-container.sidenav-container .profile-card {
+    background-color: #071437; /* Fondo oscuro */
+    color: #9A9CAE; /* Color de texto gris */
+    padding: 20px; /* Ajuste de padding para separación */
+    text-align: center; /* Centrar el contenido */
+    border-radius: 10px 0 10px 0; /* Bordes redondeados excepto el superior derecho y el inferior izquierdo */
+    margin: 10px; /* Espacio alrededor del perfil */
+}
+
+.mat-drawer-container.sidenav-container .header h2,
+.mat-drawer-container.sidenav-container .header h4 {
+    color: #9A9CAE; /* Color de texto gris para los encabezados */
+}
+
+/* Estilos para los iconos y nombres de los elementos de lista */
+.mat-drawer-container.sidenav-container .mat-list-item .icono {
+    margin-right: 10px;
+}
+
+.mat-drawer-container.sidenav-container .mat-list-item .name {
+    margin-bottom: 1px;
+}
+
+.profile-card {
+    text-align: center;
+    padding: 0 20px 20px 20px;
+    background-color: #071437; /* Fondo oscuro */
+    color: #9A9CAE; /* Color de texto gris */
+    padding: 20px; /* Ajuste de padding para separación */
+    text-align: center; /* Centrar el contenido */
+    border-radius: 10px 0 10px 0; /* Bordes redondeados excepto el superior derecho y el inferior izquierdo */
+    margin: 10px; /* Espacio alrededor del perfil */
+  }
+  
+  .header {
+    margin-top: 20px;
+    position: relative; /* Asegura que el ícono se posicione correctamente */
+  }
+  
+  .user-icon {
+    font-size: 50px; /* Ajusta el tamaño del ícono */
+    width: 50px; /* Ajusta el ancho del ícono */
+    height: 50px; /* Ajusta la altura del ícono */
+    color: #9A9CAE; /* Color del ícono */
+    display: block; /* Hace que el ícono se comporte como un bloque, tomando toda la línea */
+    margin: 0 auto 6px auto; /* Centra el ícono horizontalmente y agrega margen inferior menor */
+  }
+  
+  .light-text {
+    margin-top: 6px; /* Reduce el espacio entre el ícono y el nombre */
+    line-height: 1.2; /* Ajusta la altura de la línea para los encabezados */
+  }
+  
+  h4 {
+    margin-top: 3px; /* Reduce el espacio entre el nombre y los roles */
+    margin-bottom: 3px; /* Reduce el espacio entre los roles y el email */
+    line-height: 1.2; /* Ajusta la altura de la línea para los roles */
+  }
+  
+  h6 {
+    margin-top: 3px; /* Reduce el espacio entre los roles y el email */
+    line-height: 1.2; /* Ajusta la altura de la línea para el email */
+  }
+
+  .light-text0 {
+    color: #FFFFFF; /* Color más claro para el texto */
+    margin-top: 20px; /* Añade margen superior para separar el texto del ícono */
+  }
+  

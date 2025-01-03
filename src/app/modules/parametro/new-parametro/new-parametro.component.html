@@ -1,0 +1,26 @@
+<div>
+    <h2 mat-dialog-title>{{ estadoFormulario }} Parámetro</h2>
+</div>
+<mat-dialog-content>
+    <div *ngIf="isLoading" class="loader-container">
+        <mat-spinner diameter="30"></mat-spinner>
+    </div>  
+    <form [formGroup]="parametroForm" *ngIf="!isLoading">
+        <div class="parametro-container">
+            <mat-form-field>
+                <input matInput type="text" placeholder="Nombre" formControlName="nombre" required (input)="convertirAMayusculas($event)">
+            </mat-form-field>
+            <mat-form-field>
+                <textarea matInput placeholder="Descripción" formControlName="descripcion" required (input)="convertirAMayusculas($event)"></textarea>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button color="primary" (click)="onSave()" [disabled]="parametroForm.invalid">
+        <mat-icon>save</mat-icon> Guardar
+    </button>
+    <button mat-button color="primary" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon> Cancelar
+    </button>
+</mat-dialog-actions>

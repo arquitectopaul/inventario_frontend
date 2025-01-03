@@ -1,0 +1,8 @@
+.grupo-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.grupo-container > * {
+    width: 100%;
+}

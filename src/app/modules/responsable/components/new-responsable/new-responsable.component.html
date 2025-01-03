@@ -1,0 +1,49 @@
+<div>
+    <h2 mat-dialog-title>{{ estadoFormulario }} Custodio</h2>
+</div>
+<mat-dialog-content>
+    <div *ngIf="isLoading" class="loader-container">
+        <mat-spinner diameter="30"></mat-spinner>
+    </div>
+    <form [formGroup]="responsableForm" *ngIf="!isLoading">
+        <div class="responsable-container">
+
+                <mat-form-field>
+                    <input matInput placeholder="Nombre" formControlName="arearesponsable" required (input)="convertirAMayusculas($event)"/>
+                </mat-form-field>
+                <mat-form-field>
+                    <textarea matInput placeholder="Descripción" formControlName="nombresyapellidos" required (input)="convertirAMayusculas($event)"></textarea>
+                </mat-form-field>    
+
+                <!--div formArrayName="proveedores">
+                    <div *ngFor="let proveedor of proveedorArray.controls; let i = index" [formGroupName]="i">
+                        <mat-form-field>
+                        <mat-label>Seleccione Proveedor</mat-label>
+                        <mat-select formControlName="arearesponsable" id="arearesponsable">
+                            <mat-option *ngFor="let cat of proveedores [value]="cat.id">
+                            {{ cat.arearesponsable }}
+                            </mat-option>
+                        </mat-select>
+                        </mat-form-field>                      
+                        <button mat-raised-button color="warn" (click)="removeCustodio(i)">
+                        <mat-icon>remove</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div-->
+        </div>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+    <button mat-button color="primary" (click)="onSave()" [disabled]="responsableForm.invalid">
+        <mat-icon>save</mat-icon> Guardar
+    </button>
+
+    <button mat-button color="primary" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon> Cancelar
+    </button>
+
+</mat-dialog-actions>

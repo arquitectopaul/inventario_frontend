@@ -1,0 +1,21 @@
+import { Injectable } from '@angular/core';
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+} from '@angular/common/http';
+
+@Injectable()
+export class CorsInterceptor implements HttpInterceptor {
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
+
+    const request = req.clone({
+      setHeaders: {
+        'Content-Type':'application/json',
+        'Access-Control-Allow-Origin': 'https://z5zbqlizlj.execute-api.ap-southeast-2.amazonaws.com/prod/',
+      },
+    });
+
+    return next.handle(request);
+  }
+}

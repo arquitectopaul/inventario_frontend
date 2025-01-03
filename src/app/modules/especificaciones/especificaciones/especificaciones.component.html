@@ -1,0 +1,91 @@
+<mat-card>
+
+    <h2 class="alinear">ESPECIFICACIONES</h2>
+    <mat-card-header>
+
+        <div>
+            <mat-form-field hintLabel="Busque especificaciones" appearance="fill">
+                <mat-label>Buscar Especificaciones</mat-label>
+                <input matInput #input (keyup)="buscar(input.value)">
+            </mat-form-field>
+        </div>
+    </mat-card-header>
+
+    <mat-card-header>
+
+        <div class="right">
+            <ul>
+                <li>
+                    <button mat-raised-button color="primary" (click)="openEspecificacionesDialog()">Agregar</button>
+                </li>
+                <!--li>
+                    <button mat-raised-button color="primary" (click)="exportExcel()">Exportar a Excel</button>
+                </li-->
+            </ul>
+        </div>
+
+    </mat-card-header>
+
+    <div mat-card-image></div>
+
+    <mat-card-content>
+
+        <table mat-table [dataSource]="dataSource" class="mat-cell">
+
+            <!-- id column-->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Nº</th>
+                <td mat-cell *matCellDef="let element"> {{ element.id}}</td>
+            </ng-container>
+            <!-- especificoid column -->
+            <ng-container matColumnDef="especificoid">
+                <th mat-header-cell *matHeaderCellDef> especifico id</th>
+                <td mat-cell *matCellDef="let element"> {{ element.especificoid}}</td>
+            </ng-container>
+            <!-- nombreatributo column -->
+            <ng-container matColumnDef="nombreatributo">
+                <th mat-header-cell *matHeaderCellDef> Nombre del especifico </th>
+                <td mat-cell *matCellDef="let element"> {{ element.nombreatributo}}</td>
+            </ng-container>
+            
+            <!-- especifico column -->
+            <!--ng-container matColumnDef="especifico">
+                <th mat-header-cell *matHeaderCellDef> Especifico </th>
+                <td mat-cell *matCellDef="let element"> {{ element.especifico.nombreatributo}}</td>
+            </ng-container-->           
+
+            <!-- picture column -->
+            <!--ng-container matColumnDef="picture">
+                <th mat-header-cell *matHeaderCellDef> Foto </th>
+                <td mat-cell *matCellDef="let element"> <img [src]="element.picture" width="50" height="50"></td>
+            </ng-container-->
+
+            <!-- actions-->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let element; let i=index;">
+
+                    <button mat-icon-button color="accent" (click)="edit(element.id, element.especificacionid, element.nombreatributo, element.descripcionatributo)">
+                        <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button>
+
+                    <button *ngIf="isAdmin" mat-icon-button color="accent" (click)="delete(element.id)">
+                        <mat-icon aria-label="Delete">delete</mat-icon>
+                    </button>
+                </td>
+
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </mat-card-content>
+
+
+</mat-card>
+

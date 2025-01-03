@@ -1,0 +1,20 @@
+<mat-card>
+  <!--h2 class="alinear">Maestro de Tablas</h2-->
+  <mat-card-header>
+      <div>
+          <mat-form-field appearance="fill">
+              <mat-label>Seleccionar Tabla</mat-label>
+              <mat-select (selectionChange)="navigateTo($event.value)">
+                <mat-option *ngFor="let item of menuNav" [value]="item.route">
+                  {{ item.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+      </div>
+  </mat-card-header>
+  <mat-card-content>
+      <ng-container *ngIf="selectedComponent">
+        <ng-container *ngComponentOutlet="selectedComponent"></ng-container>
+      </ng-container>
+  </mat-card-content>
+</mat-card>

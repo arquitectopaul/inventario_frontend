@@ -1,0 +1,50 @@
+<h2 mat-dialog-title> {{ estadoFormulario }} nuevo Atributos </h2>
+<mat-dialog-content>
+
+    <form [formGroup]="atributosForm">
+        <div class="atributos-container">           
+            <mat-form-field>
+                <mat-label>Atributo</mat-label>
+                <mat-select formControlName="atributo">
+                    <mat-option *ngFor="let cat of atributos" [value]="cat.id">
+                        {{ cat.nombreatributo }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>            
+            <mat-form-field>
+                <textarea matInput placeholder="Nombre del atributo" formControlName="nombreatributo" required></textarea>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="number" placeholder="Descripción del atributo" formControlName="atributoid" required />
+            </mat-form-field> 
+
+            <!--div>
+                <mat-label> Foto: </mat-label>
+                <label for="file-upload" class="subir">
+                    Subir archivo
+                </label>
+
+                <input id="file-upload"
+                        accept="image/png, image/jpeg"
+                        (change)="onFileChanged($event)"
+                        type="file"
+                        formControlName="picture"
+                        class="input-file"/>
+                    <span> {{ nameImg }}</span>
+            </div-->
+        </div>
+
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+    <button mat-button color="primary" (click)="onSave()" [disabled]="atributosForm.invalid">
+        <mat-icon>save</mat-icon> Guardar
+    </button>
+
+    <button mat-button color="primary" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon> Cancelar
+    </button>
+
+</mat-dialog-actions>

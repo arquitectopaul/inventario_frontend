@@ -1,0 +1,121 @@
+<h2 mat-dialog-title>{{ estadoFormulario }} Activos</h2>
+<mat-dialog-content>
+  <form [formGroup]="activoForm">
+    <div class="especifico-container">
+      <div class="column">
+        <mat-form-field>
+          <mat-label>Articulo</mat-label>
+          <mat-select formControlName="articuloid" (selectionChange)="onArticuloChange($event.value)">
+            <mat-option *ngFor="let articulo of articulos" [value]="articulo.id">
+              {{ articulo.nombrearticulo }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Tipo</mat-label>
+          <input matInput [value]="getTipoNombre()" readonly style="background: none;">
+        </mat-form-field>                
+        <mat-form-field>
+          <input matInput placeholder="Cod. Inventario" formControlName="codinventario" required (input)="convertirAMayusculas($event)">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Marca</mat-label>
+          <input type="text" matInput formControlName="marcaId" [matAutocomplete]="auto" placeholder="Marca" (input)="convertirAMayusculas($event)">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let marca of filteredMarcas" [value]="marca.nombre">
+              {{ marca.nombre }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        
+        
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Fecha Compra" formControlName="fechaingreso" required (input)="convertirAMayusculas($event)">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Proveedor</mat-label>
+          <mat-select formControlName="proveedorid">
+            <mat-option *ngFor="let proveedor of proveedores" [value]="proveedor.id">
+              {{ proveedor.razonsocial }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>             
+      </div>
+      <div class="column">
+        <mat-form-field>
+          <mat-label>Custodio</mat-label>
+          <input matInput [value]="getCustodioNombre()" readonly class="mat-input-element">
+        </mat-form-field>        
+        <mat-form-field>
+          <mat-label>Categoria</mat-label>
+          <input matInput [value]="getCategoriaNombre()" readonly class="mat-input-element">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="Modelo" formControlName="modelo" required (input)="convertirAMayusculas($event)">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="Nro. Serie" formControlName="nroserie" required (input)="convertirAMayusculas($event)">
+        </mat-form-field>
+        <div class="importe-moneda-container">
+          <mat-form-field class="moneda-select-field">
+            <mat-label>Moneda</mat-label>
+            <mat-select formControlName="moneda" class="moneda-select">
+              <mat-option value="S/">S/</mat-option>
+              <mat-option value="$">$</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="importe-input-field">
+            <input matInput type="text" formControlName="importe" placeholder="Importe" required (input)="convertirAMayusculas($event)" appCurrencyFormat>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <mat-tab-group>
+      <mat-tab label="Descripción General">
+        <div class="tab-content">
+          <h4>{{ estadoFormulario }} descripción general</h4>
+          <mat-dialog-content>          
+            <mat-form-field>
+              <textarea matInput formControlName="descripcion" placeholder="Descripción" required (input)="convertirAMayusculas($event)">
+              </textarea>
+            </mat-form-field>
+          </mat-dialog-content>
+        </div>
+      </mat-tab>
+      <mat-tab label="Especificaciones Técnicas">
+        <h4>{{ estadoFormulario }} atributos específicos</h4>
+        <mat-dialog-content>
+          <div class="especifico-container">
+            <form [formGroup]="activoForm">
+              <div formArrayName="especificaciones">
+                <div *ngFor="let especifico of especificacionesArray.controls; let i = index" [formGroupName]="i" class="especifico-item">
+                  <div class="especifico-item-content">
+                    <mat-form-field class="especifico-input" appearance="fill">
+                      <input matInput formControlName="nombreatributo" placeholder="Atributo {{ i + 1 }}" required>
+                    </mat-form-field>
+                    <mat-form-field class="especifico-input" appearance="fill">
+                      <input matInput id="descripcionatributo" formControlName="descripcionatributo" required (input)="convertirAMayusculas($event)">
+                    </mat-form-field>
+                    
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </mat-dialog-content>
+        
+      </mat-tab>      
+    </mat-tab-group>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button color="primary" (click)="onSave()" [disabled]="activoForm.invalid || especificacionesArray.length === 0">
+    <mat-icon>save</mat-icon> Guardar
+  </button>
+  <button mat-button color="primary" (click)="onCancel()">
+    <mat-icon>cancel</mat-icon> Cancelar
+  </button>
+</mat-dialog-actions>

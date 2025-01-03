@@ -1,0 +1,215 @@
+<mat-card>
+    <div *ngIf="isLoading" class="loader-container">
+      <mat-spinner diameter="30"></mat-spinner>
+    </div>
+    <h2 class="alinear">ACTIVOS</h2>
+    <mat-card-header>
+      <mat-card>
+        <mat-card-title>Búsqueda</mat-card-title>
+          <mat-card-content>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Filtros de Búsqueda
+                </mat-panel-title>
+            </mat-expansion-panel-header>            
+            <div class="search-container">
+              <div class="column">
+                  <mat-form-field>
+                      <mat-label>Custodio</mat-label>
+                      <mat-select #custodioSelect>
+                          <mat-option *ngFor="let cat of custodios" [value]="cat.id">
+                              {{ cat.arearesponsable }}
+                          </mat-option>
+                      </mat-select>
+                  </mat-form-field>  
+                  <mat-form-field class="search-field" appearance="fill">
+                      <mat-label>Nro. de Serie</mat-label>
+                      <input matInput #nroserie (input)="convertirAMayusculas($event)">
+                  </mat-form-field> 
+                  <mat-form-field class="search-field" appearance="fill">
+                      <mat-label>Modelo</mat-label>
+                      <input matInput #inputModelo (input)="convertirAMayusculas($event)">
+                  </mat-form-field>
+              </div>
+              <div class="column">
+                  <mat-form-field class="search-field" appearance="fill">
+                      <mat-label>Cod Inventario</mat-label>
+                      <input matInput #inputCodinventario (input)="convertirAMayusculas($event)">
+                  </mat-form-field>
+                  <mat-form-field class="search-field" appearance="fill">
+                    <mat-label>Marca</mat-label>
+                    <input matInput #inputMarca (input)="convertirAMayusculas($event)">
+                  </mat-form-field>  
+                  <mat-form-field>
+                    <mat-label>Proveedor</mat-label>
+                    <mat-select #proveedorSelect>
+                        <mat-option *ngFor="let cat of proveedores" [value]="cat.id">
+                            {{ cat.razonsocial }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="column">
+                <mat-form-field class="search-field" appearance="fill">
+                  <mat-label>Desde</mat-label>
+                  <input matInput [matDatepicker]="pickerDesde" #fechaingresodesde>
+                  <mat-datepicker-toggle matSuffix [for]="pickerDesde"></mat-datepicker-toggle>
+                  <mat-datepicker #pickerDesde></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="search-field" appearance="fill">
+                  <mat-label>Hasta</mat-label>
+                  <input matInput [matDatepicker]="pickerHasta" #fechaingresohasta>
+                  <mat-datepicker-toggle matSuffix [for]="pickerHasta"></mat-datepicker-toggle>
+                  <mat-datepicker #pickerHasta></mat-datepicker>
+              </mat-form-field>               
+              </div>        
+           </div>
+            </mat-expansion-panel>
+          </mat-card-content>
+        </mat-card>
+    </mat-card-header>
+    <mat-card-header>
+      <div class="right">
+        <ul>
+          <li>
+            <button mat-raised-button color="primary" class="search-button"
+             (click)="limpiarCampos()">
+                Limpiar
+            </button>
+        </li>          
+          <li>
+            <button mat-raised-button color="primary" class="search-button"
+            (click)="buscar(
+              custodioSelect.value,
+              inputCodinventario.value,
+              inputModelo.value,
+              inputMarca.value, 
+              nroserie.value, 
+              fechaingresodesde.value, 
+              fechaingresohasta.value,
+              proveedorSelect.value)">
+              Buscar
+          </button>
+          </li>                  
+          <li>
+            <button mat-raised-button color="primary" (click)="openActivoDialog()">Agregar Activo</button>
+          </li>
+          <!--li>
+            <button mat-raised-button color="primary" (click)="exportExcel()">Exportar a Excel</button>
+          </li-->
+        </ul>
+      </div>
+    </mat-card-header>
+    <div mat-card-image></div>
+    <mat-card-content>
+      <table #table mat-table [dataSource]="dataSource" matSort class="mat-cell">
+        <!-- id column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Nº </th>
+          <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+        </ng-container>
+        <!-- custodio column -->
+        <ng-container matColumnDef="custodio">
+          <th mat-header-cell *matHeaderCellDef> Custodio </th>
+          <td mat-cell *matCellDef="let element"> {{ element.custodio.arearesponsable }} </td>
+        </ng-container>
+        <!-- articulo column -->
+        <ng-container matColumnDef="articulo">
+          <th mat-header-cell *matHeaderCellDef> Artículo </th>
+          <td mat-cell *matCellDef="let element"> {{ element.articulo.nombrearticulo }} </td>
+        </ng-container>
+        <ng-container matColumnDef="proveedor">
+          <th mat-header-cell *matHeaderCellDef> proveedor </th>
+          <td mat-cell *matCellDef="let element"> {{ element.proveedor.razonsocial}}</td>
+        </ng-container>
+        <ng-container matColumnDef="categoria">
+          <th mat-header-cell *matHeaderCellDef> Categoria </th>
+          <td mat-cell *matCellDef="let element"> {{ element.categoria.nombregrupo}}</td>
+      </ng-container>
+      <ng-container matColumnDef="codinventario">
+        <th mat-header-cell *matHeaderCellDef> Cod Inventario</th>
+        <td mat-cell *matCellDef="let element"> {{ element.codinventario}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="modelo">
+        <th mat-header-cell *matHeaderCellDef> Modelo</th>
+        <td mat-cell *matCellDef="let element"> {{ element.modelo}}</td>
+    </ng-container>
+
+    <!-- marca column -->
+    <ng-container matColumnDef="marca">
+        <th mat-header-cell *matHeaderCellDef> Marca </th>
+        <td mat-cell *matCellDef="let element"> {{ element.marca}}</td>
+    </ng-container>
+
+    <!-- nroserie column -->
+    <ng-container matColumnDef="nroserie">
+        <th mat-header-cell *matHeaderCellDef> Nro. Serie</th>
+        <td mat-cell *matCellDef="let element"> {{ element.nroserie}}</td>
+    </ng-container>
+
+    <!-- fechaingreso column -->
+    <ng-container matColumnDef="fechaingresostr">
+        <th mat-header-cell *matHeaderCellDef> Fecha Compra </th>
+        <td mat-cell *matCellDef="let element"> {{ element.fechaingresostr}}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="moneda">
+        <th mat-header-cell *matHeaderCellDef> Moneda </th>
+        <td mat-cell *matCellDef="let element"> {{ element.moneda}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="importe">
+        <th mat-header-cell *matHeaderCellDef> Importe </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.importe | number:'1.2-2' }}
+        </td>
+    </ng-container>          
+
+        <!-- especificaciones column -->
+    <ng-container matColumnDef="especificaciones">
+        <th mat-header-cell *matHeaderCellDef> Atributos </th>
+        <td mat-cell *matCellDef="let element">
+        <div *ngFor="let attr of element.especificaciones">
+            {{ attr.nombreatributo }}
+        </div>
+        </td>
+    </ng-container>
+
+        <!-- especificaciones column -->
+        <!--ng-container matColumnDef="especificaciones">
+          <th mat-header-cell *matHeaderCellDef> Especificaciones </th>
+          <td mat-cell *matCellDef="let element">
+            <div [formGroup]="activoForm">
+              <mat-form-field>
+                <mat-select formControlName="especificaciones">
+                  <mat-option *ngFor="let cat of especificaciones" [value]="cat.id">
+                    {{ cat.nombreatributo }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </td>
+        </ng-container-->
+        <!-- actions column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            <button mat-icon-button color="accent" (click)="edit(element.id, element.custodio, element.articulo, element.tipo, element.categoria,
+            element.codinventario, element.modelo, element.marca, element.nroserie, element.fechaingreso,
+            element.moneda, element.importe, element.proveedor, element.especificaciones, element.descripcion)">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
+            <button *ngIf="isAdmin" mat-icon-button color="accent" (click)="delete(element.id)">
+              <mat-icon aria-label="Delete">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </mat-card-content>
+  </mat-card>
+  

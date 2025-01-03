@@ -1,0 +1,8 @@
+.responsable-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.responsable-container > * {
+    width: 100%;
+}

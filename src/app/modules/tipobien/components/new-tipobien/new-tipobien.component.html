@@ -1,0 +1,31 @@
+<div>
+    <h2 mat-dialog-title>{{ estadoFormulario }} Tipo de Bien</h2>
+</div>
+<mat-dialog-content>
+    <div *ngIf="isLoading" class="loader-container">
+        <mat-spinner diameter="30"></mat-spinner>
+    </div>     
+    <form [formGroup]="tipoBienForm" *ngIf="!isLoading">
+        <div class="tipobien-container">
+            <mat-form-field>
+                <input matInput placeholder="Nombre" formControlName="nombretipo" required (input)="convertirAMayusculas($event)"/>
+            </mat-form-field>
+
+            <mat-form-field>
+                <textarea matInput placeholder="Descripción" formControlName="descriptipo" required (input)="convertirAMayusculas($event)"></textarea>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+    <button mat-button color="primary" (click)="onSave()" [disabled]="tipoBienForm.invalid">
+        <mat-icon>save</mat-icon> Guardar
+    </button>
+
+    <button mat-button color="primary" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon> Cancelar
+    </button>
+
+</mat-dialog-actions>

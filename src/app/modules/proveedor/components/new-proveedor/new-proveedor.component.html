@@ -1,0 +1,55 @@
+<div>
+    <h2 mat-dialog-title>{{ estadoFormulario }} Proveedor</h2>
+</div>
+<mat-dialog-content>
+    <div *ngIf="isLoading" class="loader-container">
+        <mat-spinner diameter="30"></mat-spinner>
+    </div>
+    <form [formGroup]="proveedorForm" *ngIf="!isLoading">
+        <div class="proveedor-container">
+            <div class="column">                
+                <mat-form-field>
+                    <mat-label>Custodio</mat-label>
+                    <mat-select formControlName="custodioid">
+                        <mat-option *ngFor="let custodio of custodios" [value]="custodio.id">
+                        {{ custodio.arearesponsable }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>                
+                <mat-form-field>
+                    <input matInput placeholder="RUC" formControlName="ruc" required maxlength="11"/>
+                    <mat-error *ngIf="proveedorForm.get('ruc')?.hasError('required')">El RUC es requerido</mat-error>
+                    <mat-error *ngIf="proveedorForm.get('ruc')?.hasError('pattern')">El RUC debe tener hasta 11 números</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Razón Social" formControlName="razonsocial" required (input)="convertirAMayusculas($event)"/>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Dirección Fiscal" formControlName="direccionfiscal" required (input)="convertirAMayusculas($event)"/>
+                </mat-form-field>
+            </div>
+            <div class="column">
+                <mat-form-field>
+                    <input matInput placeholder="Contacto" formControlName="contacto" required (input)="convertirAMayusculas($event)"/>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Telefono" formControlName="telefono" required (input)="convertirAMayusculas($event)"/>
+                </mat-form-field>                         
+                <mat-form-field>
+                    <input matInput placeholder="Correo" formControlName="correo" required (input)="convertirAMayusculas($event)"/>
+                </mat-form-field>                    
+            </div>
+        </div>
+    </form>
+    <!--button mat-raised-button color="primary" (click)="addCustodio()">
+        <mat-icon>add</mat-icon>
+    </button-->    
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button color="primary" (click)="onSave()" [disabled]="proveedorForm.invalid">
+        <mat-icon>save</mat-icon> Guardar
+    </button>
+    <button mat-button color="primary" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon> Cancelar
+    </button>
+</mat-dialog-actions>

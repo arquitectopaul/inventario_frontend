@@ -1,0 +1,21 @@
+.proveedor-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.column {
+    flex: 1 1 45%; /* Ajustar la distribución de las columnas */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+mat-form-field {
+    width: 100%; /* Hacer que los campos ocupen todo el ancho del contenedor */
+}
+.required::after{
+    content: '*';
+    margin-left: 2px;
+    color: red;
+}

@@ -1,0 +1,73 @@
+<h2 mat-dialog-title> Configuración de Artículos </h2>
+<mat-dialog-content>
+  <div *ngIf="isLoading" class="loader-container">
+    <mat-spinner diameter="30"></mat-spinner>
+  </div>   
+  <form [formGroup]="atributoForm" *ngIf="!isLoading">
+    <div class="atributo-container">
+      <mat-form-field>
+        <mat-label>Artículo</mat-label>
+        <mat-select formControlName="articuloid">
+          <mat-option *ngFor="let articulo of articulos" [value]="articulo.id">
+            {{ articulo.nombrearticulo }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>      
+        <mat-form-field>
+          <mat-label>Custodio</mat-label>
+          <mat-select formControlName="custodioid">
+            <mat-option *ngFor="let custodio of custodios" [value]="custodio.id">
+              {{ custodio.arearesponsable }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>           
+        <mat-form-field>
+          <mat-label>Tipo de bien</mat-label>
+          <mat-select formControlName="tipoid">
+            <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
+              {{ tipo.nombretipo }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Categoría</mat-label>
+          <mat-select formControlName="categoriaid">
+            <mat-option *ngFor="let categoria of categorias" [value]="categoria.id">
+              {{ categoria.nombregrupo }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="atributo-container">
+                <div formArrayName="atributos">
+                    <div *ngFor="let atributo of atributosArray.controls; let i = index" [formGroupName]="i">
+                      <!--mat-form-field>
+                        <input matInput id="nombreatributo" formControlName="nombreatributo" placeholder="Atributo {{ i + 1 }}" required (input)="convertirAMayusculas($event)">
+                      </mat-form-field-->
+                      <mat-form-field>
+                        <mat-label>Seleccione Atributo</mat-label>
+                        <mat-select formControlName="nombreatributo" id="nombreatributo">
+                          <mat-option *ngFor="let parametro of parametros" [value]="parametro.nombre">
+                            {{ parametro.nombre }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>                      
+                      <button mat-raised-button color="warn" (click)="removeAtributo(i)">
+                        <mat-icon>remove</mat-icon>
+                      </button>
+                    </div>
+                </div>                      
+    </div>
+    </form>
+    <button mat-raised-button color="primary" (click)="addAtributo()">
+        <mat-icon>add</mat-icon>
+    </button>    
+</mat-dialog-content>
+<mat-dialog-actions>      
+    <button mat-button color="primary" (click)="onSave()" [disabled]="atributoForm.invalid || atributosArray.length === 0">
+        <mat-icon>save</mat-icon> Guardar
+      </button>
+    <button mat-button color="primary" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon> Cancelar
+    </button>
+</mat-dialog-actions>

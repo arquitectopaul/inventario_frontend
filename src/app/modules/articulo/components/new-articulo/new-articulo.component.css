@@ -1,0 +1,15 @@
+.articulo-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.articulo-container > * {
+    width: 100%;
+}
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Ajusta la altura según sea necesario */
+  }

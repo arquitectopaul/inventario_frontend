@@ -1,0 +1,58 @@
+table {
+    width: 100%;
+}
+
+ul {
+    display: flex;
+}
+
+ul li {
+    list-style: none;
+    margin-right: 10px;
+}
+
+.alinear {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.right{
+    margin-left: auto;
+}
+
+mat-form-field{
+    width: 140%;
+}
+
+.mat-cell:nth-child(1),
+.mat-header-cell:nth-child(1){
+    flex: 0 0 6%;
+}
+#loader {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Cambiado a negro transparente */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#loader::before {
+    content: ""; /* Importante para pseudo-elementos */
+    /*border: 4px solid #3498db;  Color del borde */
+    border: 4px solid #ffffff; /* Cambiado a blanco */
+    border-top: 4px solid transparent; /* Deja la parte superior transparente */
+    border-radius: 50%; /* Hace que el borde sea circular */
+    width: 50px; /* Diámetro del círculo */
+    height: 50px; /* Diámetro del círculo */
+    animation: spin 1s linear infinite; /* Animación de rotación */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

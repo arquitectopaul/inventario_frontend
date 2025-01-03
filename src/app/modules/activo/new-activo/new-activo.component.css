@@ -1,0 +1,101 @@
+/* Estilos generales para el contenedor del componente */
+.especifico-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.column {
+  flex: 1 1 45%; /* Ajustar la distribución de las columnas */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Estilos para los mat-form-field */
+mat-form-field {
+  width: 100%; /* Hacer que los campos ocupen todo el ancho del contenedor */
+}
+
+/* Estilos para los elementos dentro de los formGroupName */
+.especifico-container > div[formArrayName="especificaciones"] > div[formGroupName] {
+  display: flex;
+  align-items: center; /* Alinear los elementos verticalmente al centro */
+  gap: 8px; /* Espacio entre los elementos */
+}
+
+.especifico-container > div[formArrayName="especificaciones"] > div[formGroupName] mat-form-field {
+  flex: 1; /* Hacer que los campos ocupen todo el espacio disponible */
+  margin-bottom: 0; /* Eliminar margen inferior para evitar separación adicional */
+}
+
+.especifico-container > div[formArrayName="especificaciones"] > div[formGroupName] button {
+  min-width: 40px; /* Ancho mínimo para el botón */
+}
+
+/* Estilo específico para el input */
+.especifico-container > div[formArrayName="especificaciones"] > div[formGroupName] input {
+  flex: 1; /* Hacer que el input ocupe todo el espacio disponible */
+  margin-right: 8px; /* Espacio a la derecha del input para separación con el botón */
+  width: calc(100% - 48px); /* Ancho del input (resta del espacio total menos el ancho del botón) */
+}
+
+/* Estilos para los elementos dentro de los formGroupName */
+.especifico-item-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Estilos para el contenedor de importe y moneda */
+.importe-moneda-container {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.moneda-select-field {
+  flex: 1;
+}
+
+.importe-input-field {
+  flex: 2;
+}
+
+.especifico-select-field {
+  flex: 5; /* El combo Atributo tiene el doble de ancho */
+}
+
+.especifico-input {
+  flex: 9; /* El input ocupa el máximo espacio disponible */
+}
+
+.especifico-button {
+  min-width: 40px; /* Ancho mínimo para el botón "remove" */
+}
+
+
+
+/* Estilos para los mat-form-field */
+/*.mat-form-field {
+  width: 100%;
+  margin-bottom: 8px;
+  border: none;
+  background: none;
+  }*/
+
+/* Estilo para los inputs matInput */
+.mat-input-element {
+  background: none; /* Elimina el fondo */
+  border: none; /* Elimina el borde */
+  font-size: inherit; /* Usa el tamaño de fuente del elemento padre */
+  line-height: inherit; /* Usa el alto de línea del elemento padre */
+  padding: 0; /* Ajusta el relleno según sea necesario */
+  color: inherit; /* Usa el color de texto del elemento padre */
+}
+
+/* Estilo específico para los inputs matInput readonly */
+.mat-input-element[readonly] {
+  cursor: default; /* Cambia el cursor a predeterminado */
+}

@@ -1,0 +1,8 @@
+.marca-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.marca-container > * {
+    width: 100%;
+}
